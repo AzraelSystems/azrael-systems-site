@@ -6,7 +6,6 @@
 <title>Azrael Systems</title>
 
 <style>
-
 *{
     margin:0;
     padding:0;
@@ -15,37 +14,39 @@
 }
 
 body{
-    background:
-    radial-gradient(circle at top, #102047, #02040a 75%);
+    background:radial-gradient(circle at top, #102047, #02040a 75%);
     color:white;
     overflow-x:hidden;
 }
-
-/* BACKGROUND GRID */
 
 body::before{
     content:"";
     position:fixed;
     inset:0;
     background-image:
-    linear-gradient(rgba(0,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,255,255,0.04) 1px, transparent 1px);
-    background-size:40px 40px;
-    animation:gridMove 18s linear infinite;
+        linear-gradient(rgba(0,255,255,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,255,0.045) 1px, transparent 1px);
+    background-size:42px 42px;
+    animation:gridMove 20s linear infinite;
+    pointer-events:none;
+    z-index:-2;
+}
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+        radial-gradient(circle at center 30%, rgba(0,180,255,0.30), transparent 35%),
+        radial-gradient(circle at center, rgba(0,60,120,0.22), transparent 55%);
     pointer-events:none;
     z-index:-1;
 }
 
 @keyframes gridMove{
-    from{
-        transform:translateY(0px);
-    }
-    to{
-        transform:translateY(40px);
-    }
+    from{ transform:translateY(0); }
+    to{ transform:translateY(42px); }
 }
-
-/* NAVBAR */
 
 nav{
     display:flex;
@@ -60,7 +61,7 @@ nav{
 nav h1{
     color:#8cefff;
     font-size:34px;
-    text-shadow:0 0 15px #00aaff;
+    text-shadow:0 0 12px #00aaff;
 }
 
 nav a{
@@ -74,8 +75,6 @@ nav a:hover{
     color:#7cecff;
 }
 
-/* HERO */
-
 .hero{
     min-height:90vh;
     display:flex;
@@ -83,58 +82,42 @@ nav a:hover{
     justify-content:center;
     align-items:center;
     text-align:center;
-    padding:40px 20px;
+    padding:35px 20px;
 }
 
 .logo{
-    width:260px;
-    margin-bottom:25px;
-
+    width:300px;
+    max-width:85%;
+    margin-bottom:35px;
     filter:
-    drop-shadow(0 0 18px #00aaff)
-    drop-shadow(0 0 40px #00d9ff);
-
+        drop-shadow(0 0 16px #00aaff)
+        drop-shadow(0 0 35px #00d9ff);
     animation:pulse 4s infinite ease-in-out;
 }
 
 @keyframes pulse{
-    0%{
-        transform:scale(1);
-        opacity:.92;
-    }
-
-    50%{
-        transform:scale(1.05);
-        opacity:1;
-    }
-
-    100%{
-        transform:scale(1);
-        opacity:.92;
-    }
+    0%{ transform:scale(1); opacity:.94; }
+    50%{ transform:scale(1.04); opacity:1; }
+    100%{ transform:scale(1); opacity:.94; }
 }
 
 .hero h2{
-    font-size:90px;
+    font-size:82px;
     color:#8cefff;
-
+    letter-spacing:2px;
     text-shadow:
-    0 0 12px #00aaff,
-    0 0 30px #00d9ff,
-    0 0 60px rgba(0,217,255,.4);
-
-    margin-bottom:20px;
+        0 0 8px #00aaff,
+        0 0 22px #00d9ff;
+    margin-bottom:24px;
 }
 
 .hero p{
-    max-width:950px;
-    font-size:28px;
+    max-width:920px;
+    font-size:25px;
     line-height:1.7;
-    color:#d6d6d6;
-    margin-bottom:40px;
+    color:#e4e4e4;
+    margin-bottom:42px;
 }
-
-/* BUTTONS */
 
 .buttons{
     display:flex;
@@ -165,17 +148,15 @@ nav a:hover{
 }
 
 .secondary-btn{
-    border:1px solid rgba(0,217,255,.4);
+    border:1px solid rgba(0,217,255,.45);
     color:#7cecff;
-    background:rgba(255,255,255,0.03);
+    background:rgba(255,255,255,0.035);
 }
 
 .secondary-btn:hover{
     background:rgba(0,217,255,.08);
     transform:scale(1.04);
 }
-
-/* FEATURES */
 
 .features{
     padding:120px 40px;
@@ -186,7 +167,7 @@ nav a:hover{
     font-size:48px;
     color:#8cefff;
     margin-bottom:25px;
-    text-shadow:0 0 18px #00aaff;
+    text-shadow:0 0 16px #00aaff;
 }
 
 .features p{
@@ -209,16 +190,8 @@ nav a:hover{
 .feature-card{
     padding:35px;
     border-radius:22px;
-
-    background:
-    linear-gradient(
-    145deg,
-    rgba(255,255,255,.05),
-    rgba(255,255,255,.02)
-    );
-
-    border:1px solid rgba(0,217,255,.2);
-
+    background:linear-gradient(145deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    border:1px solid rgba(0,217,255,.22);
     transition:.35s;
 }
 
@@ -238,9 +211,8 @@ nav a:hover{
     font-size:17px;
     line-height:1.7;
     color:#d8d8d8;
+    margin-bottom:0;
 }
-
-/* FOOTER */
 
 footer{
     text-align:center;
@@ -250,55 +222,53 @@ footer{
     background:rgba(255,255,255,0.02);
 }
 
-/* MOBILE */
-
 @media(max-width:768px){
-
     nav{
         padding:20px;
         flex-direction:column;
         gap:20px;
     }
 
-    .hero h2{
-        font-size:54px;
+    nav h1{
+        font-size:26px;
     }
 
-    .hero p{
-        font-size:20px;
+    nav a{
+        margin-left:12px;
+        font-size:14px;
     }
 
     .logo{
-        width:180px;
+        width:220px;
+    }
+
+    .hero h2{
+        font-size:48px;
+    }
+
+    .hero p{
+        font-size:19px;
     }
 
     .features h3{
         font-size:36px;
     }
-
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
-
 <nav>
-
     <h1>AZRAEL SYSTEMS</h1>
 
     <div>
-        <a href="#">About</a>
-        <a href="#">Technology</a>
-        <a href="#">Infrastructure</a>
+        <a href="#features">About</a>
+        <a href="#features">Technology</a>
+        <a href="#features">Infrastructure</a>
         <a href="azrael.html">Terminal</a>
     </div>
-
 </nav>
-
-<!-- HERO -->
 
 <section class="hero">
 
@@ -313,22 +283,16 @@ footer{
     </p>
 
     <div class="buttons">
-
-        <a href="azrael.html"
-        class="main-btn primary-btn">
+        <a href="azrael.html" class="main-btn primary-btn">
             Enter Azrael Terminal
         </a>
 
-        <a href="#features"
-        class="main-btn secondary-btn">
+        <a href="#features" class="main-btn secondary-btn">
             Explore Technology
         </a>
-
     </div>
 
 </section>
-
-<!-- FEATURES -->
 
 <section class="features" id="features">
 
@@ -344,7 +308,6 @@ footer{
 
         <div class="feature-card">
             <h4>AI Assistant</h4>
-
             <p>
                 Intelligent systems designed for productivity,
                 planning, automation, and advanced AI workflows.
@@ -353,7 +316,6 @@ footer{
 
         <div class="feature-card">
             <h4>Document Intelligence</h4>
-
             <p>
                 AI-powered systems capable of organizing,
                 summarizing, and analyzing private documents
@@ -363,7 +325,6 @@ footer{
 
         <div class="feature-card">
             <h4>Local-First Infrastructure</h4>
-
             <p>
                 Privacy-focused AI architecture designed around
                 self-hosted intelligence and user control.
@@ -372,7 +333,6 @@ footer{
 
         <div class="feature-card">
             <h4>Automation Systems</h4>
-
             <p>
                 Workflow automation designed to reduce repetitive
                 tasks and improve operational efficiency.
@@ -383,12 +343,8 @@ footer{
 
 </section>
 
-<!-- FOOTER -->
-
 <footer>
-
     © 2026 Azrael Systems — Advanced Artificial Intelligence Infrastructure
-
 </footer>
 
 </body>

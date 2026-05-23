@@ -10,11 +10,11 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 body{
-    background:radial-gradient(circle at top, #102047, #02040a 75%);
+    background:radial-gradient(circle at top,#102047,#02040a 75%);
     color:white;
     overflow-x:hidden;
 }
@@ -23,12 +23,17 @@ body::before{
     content:"";
     position:fixed;
     inset:0;
+
     background-image:
-        linear-gradient(rgba(0,255,255,0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,255,255,0.045) 1px, transparent 1px);
+    linear-gradient(rgba(0,255,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,255,.045) 1px, transparent 1px);
+
     background-size:42px 42px;
+
     animation:gridMove 20s linear infinite;
+
     pointer-events:none;
+
     z-index:-2;
 }
 
@@ -36,38 +41,64 @@ body::after{
     content:"";
     position:fixed;
     inset:0;
+
     background:
-        radial-gradient(circle at center 28%, rgba(0,180,255,0.34), transparent 36%),
-        radial-gradient(circle at center, rgba(0,60,120,0.24), transparent 55%);
+    radial-gradient(circle at center 28%,
+    rgba(0,180,255,.34),
+    transparent 36%),
+
+    radial-gradient(circle at center,
+    rgba(0,60,120,.24),
+    transparent 55%);
+
     pointer-events:none;
+
     z-index:-1;
 }
 
 @keyframes gridMove{
-    from{ transform:translateY(0); }
-    to{ transform:translateY(42px); }
+    from{
+        transform:translateY(0);
+    }
+
+    to{
+        transform:translateY(42px);
+    }
 }
+
+/* NAV */
 
 nav{
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
+
     padding:24px 60px;
-    border-bottom:1px solid rgba(255,255,255,0.08);
-    background:rgba(255,255,255,0.03);
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+    background:rgba(255,255,255,.03);
+
     backdrop-filter:blur(10px);
 }
 
 nav h1{
     color:#8cefff;
+
     font-size:34px;
+
     text-shadow:0 0 12px #00aaff;
 }
 
 nav a{
     color:white;
+
     text-decoration:none;
+
     margin-left:24px;
+
     transition:.3s;
 }
 
@@ -75,193 +106,317 @@ nav a:hover{
     color:#7cecff;
 }
 
+/* HERO */
+
 .hero{
     min-height:90vh;
+
     display:flex;
+
     flex-direction:column;
+
     justify-content:center;
+
     align-items:center;
+
     text-align:center;
+
     padding:30px 20px;
+
     animation:heroFloat 6s ease-in-out infinite;
 }
 
 @keyframes heroFloat{
     0%{ transform:translateY(0); }
+
     50%{ transform:translateY(-10px); }
+
     100%{ transform:translateY(0); }
 }
 
 .logo-wrap{
     position:relative;
+
     display:inline-block;
 }
 
 .logo-wrap::before{
     content:"";
+
     position:absolute;
+
     inset:-80px;
+
     background-image:
-        radial-gradient(rgba(124,236,255,0.85) 1.5px, transparent 1.5px);
+    radial-gradient(
+    rgba(124,236,255,.85) 1.5px,
+    transparent 1.5px);
+
     background-size:34px 34px;
+
     opacity:.22;
+
     animation:particleDrift 14s linear infinite;
+
     z-index:-1;
 }
 
 @keyframes particleDrift{
-    from{ transform:translate(0,0) rotate(0deg); }
-    to{ transform:translate(-35px,-35px) rotate(8deg); }
+    from{
+        transform:translate(0,0)
+        rotate(0deg);
+    }
+
+    to{
+        transform:translate(-35px,-35px)
+        rotate(8deg);
+    }
 }
 
 .logo{
     width:410px;
+
     max-width:90%;
+
     margin-bottom:38px;
+
     filter:
-        drop-shadow(0 0 20px #00aaff)
-        drop-shadow(0 0 48px #00d9ff);
+    drop-shadow(0 0 20px #00aaff)
+    drop-shadow(0 0 48px #00d9ff);
+
     animation:logoPulse 4s infinite ease-in-out;
 }
 
 @keyframes logoPulse{
-    0%{ transform:scale(1); opacity:.94; }
-    50%{ transform:scale(1.035); opacity:1; }
-    100%{ transform:scale(1); opacity:.94; }
+    0%{
+        transform:scale(1);
+        opacity:.94;
+    }
+
+    50%{
+        transform:scale(1.035);
+        opacity:1;
+    }
+
+    100%{
+        transform:scale(1);
+        opacity:.94;
+    }
 }
 
 .hero h2{
     font-size:78px;
+
     color:#8cefff;
+
     letter-spacing:2px;
+
     text-shadow:
-        0 0 8px #00aaff,
-        0 0 22px #00d9ff;
+    0 0 8px #00aaff,
+    0 0 22px #00d9ff;
+
     margin-bottom:24px;
 }
 
 .hero p{
     max-width:920px;
+
     font-size:25px;
+
     line-height:1.7;
+
     color:#e4e4e4;
+
     margin-bottom:42px;
 }
 
+/* BUTTONS */
+
 .buttons{
     display:flex;
+
     gap:24px;
+
     flex-wrap:wrap;
+
     justify-content:center;
 }
 
 .main-btn{
     display:inline-block;
+
     padding:18px 38px;
+
     border-radius:16px;
+
     text-decoration:none;
+
     font-size:18px;
+
     font-weight:bold;
+
     transition:.3s;
 }
 
 .primary-btn{
     background:#7cecff;
+
     color:black;
+
     box-shadow:0 0 25px rgba(0,217,255,.45);
+
     animation:buttonPulse 2.8s ease-in-out infinite;
 }
 
 @keyframes buttonPulse{
-    0%{ box-shadow:0 0 20px rgba(0,217,255,.35); }
-    50%{ box-shadow:0 0 42px rgba(0,217,255,.75); }
-    100%{ box-shadow:0 0 20px rgba(0,217,255,.35); }
+    0%{
+        box-shadow:
+        0 0 20px rgba(0,217,255,.35);
+    }
+
+    50%{
+        box-shadow:
+        0 0 42px rgba(0,217,255,.75);
+    }
+
+    100%{
+        box-shadow:
+        0 0 20px rgba(0,217,255,.35);
+    }
 }
 
 .primary-btn:hover{
     transform:scale(1.06);
+
     box-shadow:0 0 45px #00d9ff;
 }
 
 .secondary-btn{
     border:1px solid rgba(0,217,255,.45);
+
     color:#7cecff;
-    background:rgba(255,255,255,0.035);
+
+    background:rgba(255,255,255,.035);
 }
 
 .secondary-btn:hover{
     background:rgba(0,217,255,.08);
+
     transform:scale(1.04);
 }
 
+/* FEATURES */
+
 .features{
     padding:120px 40px;
+
     text-align:center;
 }
 
 .features h3{
     font-size:48px;
+
     color:#8cefff;
+
     margin-bottom:25px;
+
     text-shadow:0 0 16px #00aaff;
 }
 
 .features p{
     color:#cfcfcf;
+
     max-width:900px;
+
     margin:auto;
+
     margin-bottom:70px;
+
     line-height:1.7;
+
     font-size:20px;
 }
 
 .feature-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
     gap:30px;
+
     max-width:1300px;
+
     margin:auto;
 }
 
 .feature-card{
     padding:35px;
+
     border-radius:22px;
-    background:linear-gradient(145deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+
+    background:
+    linear-gradient(
+    145deg,
+    rgba(255,255,255,.05),
+    rgba(255,255,255,.02)
+    );
+
     border:1px solid rgba(0,217,255,.22);
+
     transition:.35s;
 }
 
 .feature-card:hover{
     transform:translateY(-8px);
+
     border-color:#00d9ff;
-    box-shadow:0 0 35px rgba(0,217,255,.15);
+
+    box-shadow:
+    0 0 35px rgba(0,217,255,.15);
 }
 
 .feature-card h4{
     font-size:28px;
+
     margin-bottom:20px;
+
     color:#7cecff;
 }
 
 .feature-card p{
     font-size:17px;
+
     line-height:1.7;
+
     color:#d8d8d8;
+
     margin-bottom:0;
 }
 
+/* FOOTER */
+
 footer{
     text-align:center;
+
     padding:45px;
-    border-top:1px solid rgba(255,255,255,0.08);
+
+    border-top:1px solid rgba(255,255,255,.08);
+
     color:#888;
-    background:rgba(255,255,255,0.02);
+
+    background:rgba(255,255,255,.02);
 }
 
+/* MOBILE */
+
 @media(max-width:768px){
+
     nav{
         padding:20px;
+
         flex-direction:column;
+
         gap:20px;
     }
 
@@ -271,6 +426,7 @@ footer{
 
     nav a{
         margin-left:12px;
+
         font-size:14px;
     }
 
@@ -289,27 +445,44 @@ footer{
     .features h3{
         font-size:36px;
     }
+
 }
+
 </style>
 </head>
 
 <body>
 
+<!-- NAV -->
+
 <nav>
+
     <h1>AZRAEL SYSTEMS</h1>
 
     <div>
+
         <a href="#features">About</a>
+
         <a href="#features">Technology</a>
+
         <a href="#features">Infrastructure</a>
-        <a href="azrael.html">Terminal</a>
+
+        <a href="azrael.html">Prototype</a>
+
     </div>
+
 </nav>
+
+<!-- HERO -->
 
 <section class="hero">
 
     <div class="logo-wrap">
-        <img src="logo.png" class="logo" alt="Azrael Systems Logo">
+
+        <img src="logo.png"
+        class="logo"
+        alt="Azrael Systems Logo">
+
     </div>
 
     <h2>AZRAEL SYSTEMS</h2>
@@ -321,16 +494,26 @@ footer{
     </p>
 
     <div class="buttons">
-        <a href="azrael.html" class="main-btn primary-btn">
-            Enter Azrael Terminal
+
+        <a href="azrael.html"
+        class="main-btn primary-btn">
+
+            View Prototype Terminal
+
         </a>
 
-        <a href="#features" class="main-btn secondary-btn">
+        <a href="#features"
+        class="main-btn secondary-btn">
+
             Explore Technology
+
         </a>
+
     </div>
 
 </section>
+
+<!-- FEATURES -->
 
 <section class="features" id="features">
 
@@ -345,44 +528,60 @@ footer{
     <div class="feature-grid">
 
         <div class="feature-card">
+
             <h4>AI Assistant</h4>
+
             <p>
                 Intelligent systems designed for productivity,
                 planning, automation, and advanced AI workflows.
             </p>
+
         </div>
 
         <div class="feature-card">
+
             <h4>Document Intelligence</h4>
+
             <p>
                 AI-powered systems capable of organizing,
                 summarizing, and analyzing private documents
                 and knowledge bases.
             </p>
+
         </div>
 
         <div class="feature-card">
+
             <h4>Local-First Infrastructure</h4>
+
             <p>
                 Privacy-focused AI architecture designed around
                 self-hosted intelligence and user control.
             </p>
+
         </div>
 
         <div class="feature-card">
+
             <h4>Automation Systems</h4>
+
             <p>
                 Workflow automation designed to reduce repetitive
                 tasks and improve operational efficiency.
             </p>
+
         </div>
 
     </div>
 
 </section>
 
+<!-- FOOTER -->
+
 <footer>
+
     © 2026 Azrael Systems — Advanced Artificial Intelligence Infrastructure
+
 </footer>
 
 </body>

@@ -1,89 +1,153 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Azrael Systems</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Azrael Systems</title>
 
   <style>
     body {
       margin: 0;
-      background: radial-gradient(circle at top, #071b38, #02040a 65%);
-      color: white;
       font-family: Arial, sans-serif;
+      color: white;
       text-align: center;
+      background:
+        radial-gradient(circle at top, #0b2447 0%, #02040a 65%);
     }
 
     .logo {
       width: 420px;
       max-width: 90%;
       margin-top: 10px;
-      margin-bottom: 5px;
-      filter: drop-shadow(0 0 25px #00aaff);
+      margin-bottom: 0;
+      filter:
+        drop-shadow(0 0 10px #00bfff)
+        drop-shadow(0 0 30px #0077ff);
     }
 
     .hero {
-      padding: 0 20px 70px;
+      padding: 0 20px 80px;
     }
 
     h1 {
-      font-size: 72px;
-      margin: 5px 0 10px;
-      color: #66d9ff;
-      text-shadow: 0 0 28px #007bff;
+      font-size: 82px;
+      margin: 0;
+      letter-spacing: 4px;
+      color: #8fe9ff;
+      text-shadow:
+        0 0 10px #00bfff,
+        0 0 30px #0077ff;
     }
 
     .subtitle {
       font-size: 22px;
       color: #dbeafe;
-      margin-bottom: 35px;
+      margin-top: 18px;
+      margin-bottom: 40px;
+      max-width: 850px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
     }
 
     .button {
       display: inline-block;
-      padding: 16px 38px;
+      padding: 16px 40px;
       border-radius: 14px;
-      background: #5ee7ff;
+      background: linear-gradient(90deg, #66e3ff, #7efcff);
       color: #00111f;
       font-weight: bold;
       text-decoration: none;
+      box-shadow: 0 0 20px rgba(0,170,255,0.35);
+      transition: 0.3s ease;
+    }
+
+    .button:hover {
+      transform: scale(1.05);
     }
 
     .section {
-      padding: 60px 20px;
-      max-width: 1100px;
+      padding: 70px 20px;
+      max-width: 1200px;
       margin: auto;
+    }
+
+    h2 {
+      font-size: 42px;
+      margin-bottom: 10px;
+      color: #b7ecff;
+    }
+
+    .section p {
+      color: #d1d5db;
+      max-width: 900px;
+      margin: auto;
+      line-height: 1.7;
     }
 
     .cards {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 15px;
-      margin-top: 35px;
+      gap: 18px;
+      margin-top: 45px;
     }
 
     .card {
-      width: 200px;
-      min-height: 130px;
-      padding: 24px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(94,231,255,0.35);
-      box-shadow: 0 0 18px rgba(0,170,255,0.15);
+      width: 220px;
+      min-height: 160px;
+      padding: 28px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(94,231,255,0.28);
+      backdrop-filter: blur(8px);
+      box-shadow:
+        0 0 20px rgba(0,170,255,0.08);
+      transition: 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow:
+        0 0 28px rgba(0,170,255,0.22);
     }
 
     .card h3 {
       color: #7dd3fc;
+      margin-bottom: 15px;
+      font-size: 24px;
     }
 
     .card p {
+      font-size: 15px;
       color: #d1d5db;
-      font-size: 14px;
+      line-height: 1.5;
     }
 
     footer {
-      padding: 40px;
-      color: #8b949e;
+      padding: 50px 20px;
+      color: #7c8593;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+
+      .logo {
+        width: 300px;
+      }
+
+      h1 {
+        font-size: 48px;
+      }
+
+      .subtitle {
+        font-size: 18px;
+      }
+
+      .card {
+        width: 90%;
+      }
+
     }
   </style>
 </head>
@@ -93,43 +157,70 @@
   <img src="logo.png" alt="Azrael Systems Logo" class="logo">
 
   <section class="hero">
-    <h1>Project Azrael</h1>
-    <p class="subtitle">Private AI systems built for real-world intelligence.</p>
-    <a href="#" class="button">Early Access Coming Soon</a>
+
+    <h1>AZRAEL SYSTEMS</h1>
+
+    <p class="subtitle">
+      Advanced artificial intelligence systems for automation,
+      research, knowledge, and private infrastructure.
+    </p>
+
+    <a href="#" class="button">
+      Early Access Coming Soon
+    </a>
+
   </section>
 
   <section class="section">
+
     <h2>What We’re Building</h2>
+
     <p>
-      Azrael Systems is developing intelligent AI systems for knowledge,
-      automation, research, documents, productivity, and personal control.
+      Azrael Systems is building next-generation AI infrastructure
+      focused on privacy, automation, research, productivity,
+      intelligent assistants, and local-first artificial intelligence.
     </p>
 
     <div class="cards">
+
       <div class="card">
         <h3>AI Assistant</h3>
-        <p>A practical AI assistant designed for everyday problems and complex tasks.</p>
+        <p>
+          Intelligent assistants designed for practical real-world tasks,
+          workflows, and advanced reasoning.
+        </p>
       </div>
 
       <div class="card">
-        <h3>Document Intelligence</h3>
-        <p>Tools for PDFs, manuals, books, notes, and private knowledge systems.</p>
+        <h3>Document AI</h3>
+        <p>
+          AI systems capable of understanding PDFs, books,
+          manuals, notes, and private knowledge bases.
+        </p>
       </div>
 
       <div class="card">
         <h3>Automation</h3>
-        <p>AI workflows for reminders, research, organization, and productivity.</p>
+        <p>
+          Smart automation systems for productivity,
+          research, scheduling, and workflow management.
+        </p>
       </div>
 
       <div class="card">
-        <h3>Local-First AI</h3>
-        <p>Designed with privacy-focused, self-hosted, and local AI workflows in mind.</p>
+        <h3>Local AI</h3>
+        <p>
+          Privacy-focused AI infrastructure running locally
+          through self-hosted intelligent systems.
+        </p>
       </div>
+
     </div>
+
   </section>
 
   <footer>
-    © 2026 Azrael Systems — Project Azrael
+    © 2026 Azrael Systems
   </footer>
 
 </body>

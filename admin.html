@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Azrael Admin</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:
+    radial-gradient(circle at top,#081120,#02040a 70%);
+    color:white;
+    overflow:hidden;
+}
+
+/* BACKGROUND GRID */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background-image:
+    linear-gradient(rgba(0,255,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,255,.05) 1px, transparent 1px);
+
+    background-size:42px 42px;
+
+    animation:gridMove 18s linear infinite;
+
+    pointer-events:none;
+
+    z-index:-2;
+}
+
+@keyframes gridMove{
+    from{
+        transform:translateY(0);
+    }
+
+    to{
+        transform:translateY(42px);
+    }
+}
+
+/* GLOW */
+
+body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:
+    radial-gradient(circle at center,
+    rgba(0,180,255,.24),
+    transparent 40%);
+
+    pointer-events:none;
+
+    z-index:-1;
+}
+
+/* LAYOUT */
+
+.container{
+    display:flex;
+    height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    width:270px;
+
+    background:rgba(255,255,255,.03);
+
+    border-right:1px solid rgba(255,255,255,.08);
+
+    padding:28px;
+
+    backdrop-filter:blur(10px);
+}
+
+.sidebar h1{
+    color:#8cefff;
+
+    font-size:32px;
+
+    margin-bottom:35px;
+
+    text-shadow:0 0 15px #00aaff;
+}
+
+.sidebar a{
+    display:block;
+
+    margin-bottom:16px;
+
+    padding:14px 18px;
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    color:#d8f8ff;
+
+    background:rgba(255,255,255,.03);
+
+    border:1px solid rgba(255,255,255,.05);
+
+    transition:.3s;
+}
+
+.sidebar a:hover{
+    background:rgba(0,217,255,.08);
+
+    border-color:rgba(0,217,255,.25);
+
+    transform:translateX(4px);
+}
+
+/* MAIN */
+
+.main{
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+/* HEADER */
+
+.header{
+    padding:28px 40px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+    background:rgba(255,255,255,.03);
+
+    backdrop-filter:blur(10px);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.header h2{
+    color:#8cefff;
+
+    font-size:40px;
+
+    text-shadow:0 0 18px #00aaff;
+}
+
+.return-btn{
+    padding:14px 20px;
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    background:rgba(255,255,255,.04);
+
+    border:1px solid rgba(0,217,255,.2);
+
+    color:#7cecff;
+
+    transition:.3s;
+}
+
+.return-btn:hover{
+    background:rgba(0,217,255,.08);
+
+    transform:scale(1.05);
+}
+
+/* CONTENT */
+
+.content{
+    flex:1;
+
+    overflow-y:auto;
+
+    padding:40px;
+}
+
+/* HERO */
+
+.hero{
+    text-align:center;
+
+    margin-bottom:50px;
+
+    animation:floatHero 6s ease-in-out infinite;
+}
+
+@keyframes floatHero{
+    0%{ transform:translateY(0); }
+    50%{ transform:translateY(-8px); }
+    100%{ transform:translateY(0); }
+}
+
+.logo{
+    width:260px;
+
+    margin-bottom:25px;
+
+    filter:
+    drop-shadow(0 0 22px #00aaff)
+    drop-shadow(0 0 50px #00d9ff);
+}
+
+.hero h1{
+    font-size:68px;
+
+    color:#8cefff;
+
+    margin-bottom:18px;
+
+    text-shadow:
+    0 0 12px #00aaff,
+    0 0 30px #00d9ff;
+}
+
+.hero p{
+    max-width:900px;
+
+    margin:auto;
+
+    font-size:22px;
+
+    line-height:1.7;
+
+    color:#dddddd;
+}
+
+/* STATUS CARDS */
+
+.grid{
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(260px,1fr));
+
+    gap:28px;
+}
+
+.card{
+    padding:28px;
+
+    border-radius:22px;
+
+    background:
+    linear-gradient(
+    145deg,
+    rgba(255,255,255,.05),
+    rgba(255,255,255,.02)
+    );
+
+    border:1px solid rgba(0,217,255,.18);
+
+    transition:.35s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+
+    border-color:#00d9ff;
+
+    box-shadow:
+    0 0 35px rgba(0,217,255,.12);
+}
+
+.card h3{
+    color:#7cecff;
+
+    font-size:28px;
+
+    margin-bottom:18px;
+}
+
+.card p{
+    color:#d8d8d8;
+
+    line-height:1.7;
+}
+
+/* TERMINAL */
+
+.terminal{
+    margin-top:45px;
+
+    padding:30px;
+
+    border-radius:22px;
+
+    background:rgba(0,0,0,.55);
+
+    border:1px solid rgba(0,217,255,.2);
+
+    font-family:"Courier New",monospace;
+
+    box-shadow:
+    0 0 30px rgba(0,217,255,.08);
+}
+
+.terminal-line{
+    margin-bottom:14px;
+
+    color:#9cefff;
+}
+
+.online{
+    color:#42ff8c;
+}
+
+.warning{
+    color:#ffd166;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .container{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+
+        display:flex;
+
+        overflow-x:auto;
+
+        gap:12px;
+    }
+
+    .sidebar a{
+        white-space:nowrap;
+        margin-bottom:0;
+    }
+
+    .header{
+        flex-direction:column;
+        gap:18px;
+        text-align:center;
+    }
+
+    .hero h1{
+        font-size:42px;
+    }
+
+    .hero p{
+        font-size:18px;
+    }
+
+    .logo{
+        width:180px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <h1>AZRAEL ADMIN</h1>
+
+        <a href="#">Dashboard</a>
+        <a href="#">AI Systems</a>
+        <a href="#">Documents</a>
+        <a href="#">Infrastructure</a>
+        <a href="#">Security</a>
+        <a href="#">Logs</a>
+
+    </div>
+
+    <!-- MAIN -->
+
+    <div class="main">
+
+        <!-- HEADER -->
+
+        <div class="header">
+
+            <h2>PRIVATE SYSTEM ACCESS</h2>
+
+            <a href="index.html"
+            class="return-btn">
+
+                ← Return Home
+
+            </a>
+
+        </div>
+
+        <!-- CONTENT -->
+
+        <div class="content">
+
+            <div class="hero">
+
+                <img src="logo.png"
+                class="logo"
+                alt="Azrael Systems Logo">
+
+                <h1>AZRAEL ADMIN</h1>
+
+                <p>
+                    Private infrastructure dashboard for
+                    Project Azrael. Internal systems,
+                    AI workflows, document intelligence,
+                    and backend integrations are currently
+                    under development.
+                </p>
+
+            </div>
+
+            <!-- STATUS GRID -->
+
+            <div class="grid">
+
+                <div class="card">
+
+                    <h3>AI Core</h3>
+
+                    <p>
+                        Local-first AI systems and backend
+                        intelligence architecture currently
+                        being tested and expanded.
+                    </p>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Infrastructure</h3>
+
+                    <p>
+                        Private deployment systems,
+                        workflow automation, and secure
+                        architecture planning in progress.
+                    </p>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Document Systems</h3>
+
+                    <p>
+                        Intelligent document workflows,
+                        PDF analysis, and knowledge-base
+                        indexing currently in testing.
+                    </p>
+
+                </div>
+
+                <div class="card">
+
+                    <h3>Security</h3>
+
+                    <p>
+                        Future plans include secure login,
+                        encrypted workflows, and restricted
+                        AI system access controls.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- TERMINAL -->
+
+            <div class="terminal">
+
+                <div class="terminal-line">
+                    > Initializing Admin Systems...
+                </div>
+
+                <div class="terminal-line">
+                    > AI Core:
+                    <span class="online">
+                        ONLINE
+                    </span>
+                </div>
+
+                <div class="terminal-line">
+                    > Local Infrastructure:
+                    <span class="online">
+                        ACTIVE
+                    </span>
+                </div>
+
+                <div class="terminal-line">
+                    > External Public Access:
+                    <span class="warning">
+                        LIMITED
+                    </span>
+                </div>
+
+                <div class="terminal-line">
+                    > Secure Backend Connection:
+                    <span class="warning">
+                        PENDING
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

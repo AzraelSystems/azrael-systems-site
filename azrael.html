@@ -1,250 +1,407 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Azrael AI</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Azrael AI Terminal</title>
 
-  <style>
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
 
-    body {
-      margin: 0;
-      background: #02040a;
-      color: white;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
+body{
+    background:
+    radial-gradient(circle at top, #0d1b2a, #05070d 70%);
+    color:white;
+    overflow:hidden;
+}
+
+.container{
+    display:flex;
+    height:100vh;
+}
+
+/* LEFT PANEL */
+
+.sidebar{
+    width:260px;
+    background:rgba(255,255,255,0.04);
+    border-right:1px solid rgba(0,255,255,0.15);
+    padding:25px;
+    backdrop-filter:blur(10px);
+}
+
+.sidebar h1{
+    font-size:34px;
+    margin-bottom:30px;
+    color:#7cecff;
+    text-shadow:0 0 15px #00aaff;
+}
+
+.status-box{
+    padding:18px;
+    border-radius:18px;
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.08);
+    line-height:2;
+}
+
+.online{
+    color:#4dff88;
+    font-weight:bold;
+}
+
+/* MAIN AREA */
+
+.main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    overflow:hidden;
+}
+
+/* GRID EFFECT */
+
+.main::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+    linear-gradient(rgba(0,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,255,0.05) 1px, transparent 1px);
+    background-size:40px 40px;
+    animation:gridMove 18s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes gridMove{
+    from{
+        transform:translateY(0px);
     }
-
-    .background {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      background:
-        radial-gradient(circle at top, #0b2447 0%, #02040a 65%);
+    to{
+        transform:translateY(40px);
     }
+}
 
-    .background::before {
-      content: "";
-      position: absolute;
-      width: 200%;
-      height: 200%;
+/* HEADER */
 
-      background-image:
-        radial-gradient(rgba(94,231,255,0.8) 1px, transparent 1px);
+.header{
+    padding:25px 35px;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    background:rgba(255,255,255,0.03);
+    backdrop-filter:blur(10px);
+    z-index:2;
+}
 
-      background-size: 40px 40px;
+.header h2{
+    color:#8cefff;
+    font-size:38px;
+    text-shadow:0 0 20px #00aaff;
+}
 
-      opacity: 0.22;
+/* CHAT AREA */
 
-      animation: moveGrid 20s linear infinite;
+.chat-area{
+    flex:1;
+    padding:35px;
+    overflow-y:auto;
+    z-index:2;
+}
+
+.message{
+    max-width:70%;
+    margin-bottom:20px;
+    padding:18px;
+    border-radius:18px;
+    line-height:1.7;
+    animation:fadeIn .4s ease;
+}
+
+.ai{
+    background:rgba(0,170,255,0.12);
+    border:1px solid rgba(0,200,255,0.25);
+    box-shadow:0 0 15px rgba(0,170,255,0.15);
+}
+
+.user{
+    margin-left:auto;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.12);
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(10px);
     }
-
-    @keyframes moveGrid {
-      from { transform: translate(0,0); }
-      to { transform: translate(-100px,-100px); }
+    to{
+        opacity:1;
+        transform:translateY(0);
     }
+}
 
-    .layout {
-      display: flex;
-      height: 100vh;
+/* INPUT */
+
+.input-area{
+    display:flex;
+    padding:25px;
+    gap:15px;
+    border-top:1px solid rgba(255,255,255,0.08);
+    background:rgba(255,255,255,0.03);
+    backdrop-filter:blur(10px);
+    z-index:2;
+}
+
+.input-area input{
+    flex:1;
+    padding:18px;
+    border:none;
+    border-radius:16px;
+    background:rgba(255,255,255,0.08);
+    color:white;
+    font-size:16px;
+    outline:none;
+}
+
+.input-area input::placeholder{
+    color:#aaa;
+}
+
+.input-area button{
+    padding:18px 28px;
+    border:none;
+    border-radius:16px;
+    background:#7cecff;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.input-area button:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 20px #00d9ff;
+}
+
+/* LOGO */
+
+.logo{
+    width:180px;
+    margin-bottom:25px;
+    filter:
+    drop-shadow(0 0 18px #00aaff)
+    drop-shadow(0 0 35px #00d9ff);
+    animation:pulse 4s infinite ease-in-out;
+}
+
+@keyframes pulse{
+    0%{
+        transform:scale(1);
+        opacity:.9;
     }
-
-    .sidebar {
-      width: 260px;
-      background: rgba(0,0,0,0.45);
-      border-right: 1px solid rgba(94,231,255,0.18);
-      backdrop-filter: blur(10px);
-      padding: 20px;
-      box-sizing: border-box;
+    50%{
+        transform:scale(1.05);
+        opacity:1;
     }
-
-    .sidebar h2 {
-      color: #8fe9ff;
-      letter-spacing: 2px;
+    100%{
+        transform:scale(1);
+        opacity:.9;
     }
+}
 
-    .status {
-      margin-top: 25px;
-      padding: 15px;
-      border-radius: 14px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(94,231,255,0.2);
-      font-size: 14px;
-      line-height: 1.7;
-    }
+.hero{
+    text-align:center;
+    margin-bottom:40px;
+}
 
-    .online {
-      color: #42f59b;
-    }
+.hero h1{
+    font-size:72px;
+    color:#8cefff;
+    text-shadow:
+    0 0 12px #00aaff,
+    0 0 30px #00d9ff;
+    margin-bottom:15px;
+}
 
-    .chat-area {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .topbar {
-      padding: 20px;
-      border-bottom: 1px solid rgba(94,231,255,0.15);
-      background: rgba(0,0,0,0.25);
-      backdrop-filter: blur(10px);
-    }
-
-    .topbar h1 {
-      margin: 0;
-      color: #8fe9ff;
-      font-size: 28px;
-      letter-spacing: 2px;
-    }
-
-    .messages {
-      flex: 1;
-      padding: 30px;
-      overflow-y: auto;
-    }
-
-    .message {
-      max-width: 720px;
-      margin-bottom: 20px;
-      padding: 18px;
-      border-radius: 18px;
-      line-height: 1.6;
-    }
-
-    .assistant {
-      background: rgba(94,231,255,0.08);
-      border: 1px solid rgba(94,231,255,0.2);
-    }
-
-    .user {
-      background: rgba(255,255,255,0.05);
-      margin-left: auto;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .input-area {
-      padding: 20px;
-      border-top: 1px solid rgba(94,231,255,0.15);
-      background: rgba(0,0,0,0.3);
-      display: flex;
-      gap: 12px;
-    }
-
-    input {
-      flex: 1;
-      padding: 16px;
-      border-radius: 14px;
-      border: none;
-      outline: none;
-      background: rgba(255,255,255,0.08);
-      color: white;
-      font-size: 15px;
-    }
-
-    button {
-      padding: 16px 24px;
-      border: none;
-      border-radius: 14px;
-      background: linear-gradient(90deg,#66e3ff,#7efcff);
-      color: black;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .typing {
-      color: #7dd3fc;
-      font-style: italic;
-      animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-      0%,100% { opacity: 0.4; }
-      50% { opacity: 1; }
-    }
-
-    @media (max-width: 768px) {
-
-      .sidebar {
-        display: none;
-      }
-
-      .topbar h1 {
-        font-size: 22px;
-      }
-
-    }
-
-  </style>
+.hero p{
+    font-size:24px;
+    color:#ddd;
+    max-width:900px;
+    margin:auto;
+    line-height:1.6;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="background"></div>
+<div class="container">
 
-  <div class="layout">
+    <!-- SIDEBAR -->
 
     <div class="sidebar">
+        <h1>AZRAEL AI</h1>
 
-      <h2>AZRAEL AI</h2>
+        <div class="status-box">
+            • System Status:
+            <span class="online">ONLINE</span><br>
 
-      <div class="status">
-        ● System Status:
-        <span class="online">ONLINE</span>
-        <br><br>
+            • Local Infrastructure:
+            <span class="online">ACTIVE</span><br>
 
-        ● Local Infrastructure:
-        <span class="online">ACTIVE</span>
-        <br><br>
+            • Knowledge Base:
+            <span style="color:#ffd166;">TESTING</span><br>
 
-        ● Knowledge Base:
-        TESTING
-        <br><br>
+            • Public Access:
+            <span style="color:#ffd166;">LIMITED</span>
+        </div>
+    </div>
 
-        ● Public Access:
-        LIMITED
-      </div>
+    <!-- MAIN -->
+
+    <div class="main">
+
+        <div class="header">
+            <h2>AZRAEL TERMINAL</h2>
+        </div>
+
+        <div class="chat-area" id="chat-area">
+
+            <div class="hero">
+                <img src="logo.png" class="logo">
+
+                <h1>AZRAEL SYSTEMS</h1>
+
+                <p>
+                    Advanced artificial intelligence systems for automation,
+                    research, knowledge, and private infrastructure.
+                </p>
+            </div>
+
+            <div class="message ai">
+                <strong>Azrael:</strong><br>
+                Welcome to Azrael AI.
+            </div>
+
+            <div class="message ai">
+                <strong>Azrael:</strong><br>
+                Intelligent systems infrastructure initialized successfully.
+            </div>
+
+        </div>
+
+        <!-- INPUT -->
+
+        <div class="input-area">
+            <input
+            type="text"
+            id="user-input"
+            placeholder="Message Azrael...">
+
+            <button id="send-btn">
+                Send
+            </button>
+        </div>
 
     </div>
 
-    <div class="chat-area">
+</div>
 
-      <div class="topbar">
-        <h1>AZRAEL TERMINAL</h1>
-      </div>
+<script>
+const input = document.getElementById("user-input");
+const sendBtn = document.getElementById("send-btn");
+const chatArea = document.getElementById("chat-area");
 
-      <div class="messages">
+function addMessage(text, type = "ai") {
 
-        <div class="message assistant">
-          Welcome to Azrael AI.<br><br>
+    const msg = document.createElement("div");
 
-          Advanced artificial intelligence systems for research,
-          automation, knowledge, and intelligent workflows.
-        </div>
+    msg.classList.add("message");
+    msg.classList.add(type);
 
-        <div class="message user">
-          What can Azrael do?
-        </div>
+    if(type === "user"){
+        msg.innerHTML =
+        `<strong>You:</strong><br>${text}`;
+    } else {
+        msg.innerHTML =
+        `<strong>Azrael:</strong><br>${text}`;
+    }
 
-        <div class="message assistant">
-          Azrael is being developed as a local-first AI platform
-          focused on intelligent assistance, document analysis,
-          automation systems, and advanced AI workflows.
-        </div>
+    chatArea.appendChild(msg);
 
-        <div class="typing">
-          Azrael is online...
-        </div>
+    chatArea.scrollTop =
+    chatArea.scrollHeight;
+}
 
-      </div>
+function fakeResponse(message){
 
-      <div class="input-area">
-        <input type="text" placeholder="Message Azrael...">
-        <button>Send</button>
-      </div>
+    const lower =
+    message.toLowerCase();
 
-    </div>
+    if(lower.includes("privacy")){
+        return "Azrael prioritizes local-first infrastructure, encrypted workflows, and private AI deployment systems.";
+    }
 
-  </div>
+    if(lower.includes("ai")){
+        return "Azrael AI is focused on automation, document intelligence, research systems, and advanced local AI workflows.";
+    }
+
+    if(lower.includes("automation")){
+        return "Automation systems can significantly improve operational efficiency and reduce repetitive workloads.";
+    }
+
+    if(lower.includes("trucking")){
+        return "AI-powered trucking systems can optimize dispatching, maintenance scheduling, and logistics workflows.";
+    }
+
+    if(lower.includes("real estate")){
+        return "Azrael can assist with property analysis, document organization, workflow automation, and financial projections.";
+    }
+
+    return "Azrael is processing your request through its intelligent systems infrastructure.";
+}
+
+function sendMessage(){
+
+    const text =
+    input.value.trim();
+
+    if(!text) return;
+
+    addMessage(text, "user");
+
+    input.value = "";
+
+    setTimeout(() => {
+
+        const response =
+        fakeResponse(text);
+
+        addMessage(response, "ai");
+
+    }, 900);
+}
+
+sendBtn.addEventListener(
+"click",
+sendMessage
+);
+
+input.addEventListener(
+"keypress",
+function(e){
+
+    if(e.key === "Enter"){
+        sendMessage();
+    }
+
+});
+</script>
 
 </body>
 </html>

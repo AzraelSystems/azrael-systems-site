@@ -37,8 +37,8 @@ body::after{
     position:fixed;
     inset:0;
     background:
-        radial-gradient(circle at center 30%, rgba(0,180,255,0.30), transparent 35%),
-        radial-gradient(circle at center, rgba(0,60,120,0.22), transparent 55%);
+        radial-gradient(circle at center 28%, rgba(0,180,255,0.34), transparent 36%),
+        radial-gradient(circle at center, rgba(0,60,120,0.24), transparent 55%);
     pointer-events:none;
     z-index:-1;
 }
@@ -82,27 +82,27 @@ nav a:hover{
     justify-content:center;
     align-items:center;
     text-align:center;
-    padding:35px 20px;
+    padding:30px 20px;
 }
 
 .logo{
-    width:300px;
-    max-width:85%;
-    margin-bottom:35px;
+    width:360px;
+    max-width:88%;
+    margin-bottom:38px;
     filter:
-        drop-shadow(0 0 16px #00aaff)
-        drop-shadow(0 0 35px #00d9ff);
+        drop-shadow(0 0 18px #00aaff)
+        drop-shadow(0 0 42px #00d9ff);
     animation:pulse 4s infinite ease-in-out;
 }
 
 @keyframes pulse{
     0%{ transform:scale(1); opacity:.94; }
-    50%{ transform:scale(1.04); opacity:1; }
+    50%{ transform:scale(1.035); opacity:1; }
     100%{ transform:scale(1); opacity:.94; }
 }
 
 .hero h2{
-    font-size:82px;
+    font-size:78px;
     color:#8cefff;
     letter-spacing:2px;
     text-shadow:
@@ -239,11 +239,11 @@ footer{
     }
 
     .logo{
-        width:220px;
+        width:250px;
     }
 
     .hero h2{
-        font-size:48px;
+        font-size:46px;
     }
 
     .hero p{

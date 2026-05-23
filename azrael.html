@@ -6,6 +6,7 @@
 <title>Azrael AI Terminal</title>
 
 <style>
+
 *{
     margin:0;
     padding:0;
@@ -14,15 +15,20 @@
 }
 
 body{
-    background: radial-gradient(circle at top, #0d1b2a, #05070d 70%);
+    background:
+    radial-gradient(circle at top, #0d1b2a, #05070d 70%);
     color:white;
     overflow:hidden;
 }
+
+/* LAYOUT */
 
 .container{
     display:flex;
     height:100vh;
 }
+
+/* SIDEBAR */
 
 .sidebar{
     width:260px;
@@ -52,6 +58,8 @@ body{
     font-weight:bold;
 }
 
+/* MAIN */
+
 .main{
     flex:1;
     display:flex;
@@ -60,22 +68,35 @@ body{
     overflow:hidden;
 }
 
+/* ANIMATED GRID */
+
 .main::before{
     content:"";
     position:absolute;
     inset:0;
+
     background-image:
     linear-gradient(rgba(0,255,255,0.06) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0,255,255,0.06) 1px, transparent 1px);
+
     background-size:40px 40px;
+
     animation:gridMove 18s linear infinite;
+
     pointer-events:none;
 }
 
 @keyframes gridMove{
-    from{ transform:translateY(0px); }
-    to{ transform:translateY(40px); }
+    from{
+        transform:translateY(0px);
+    }
+
+    to{
+        transform:translateY(40px);
+    }
 }
+
+/* HEADER */
 
 .header{
     padding:25px 35px;
@@ -85,11 +106,48 @@ body{
     z-index:2;
 }
 
+.header-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
 .header h2{
     color:#8cefff;
     font-size:38px;
-    text-shadow:0 0 20px #00aaff;
+
+    text-shadow:
+    0 0 20px #00aaff;
 }
+
+/* RETURN BUTTON */
+
+.back-btn{
+    padding:12px 18px;
+    border-radius:12px;
+    text-decoration:none;
+
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(0,217,255,.25);
+
+    color:#7cecff;
+
+    transition:.3s;
+
+    font-size:14px;
+}
+
+.back-btn:hover{
+    background:rgba(0,217,255,.12);
+
+    transform:scale(1.05);
+
+    box-shadow:
+    0 0 18px rgba(0,217,255,.25);
+}
+
+/* CHAT AREA */
 
 .chat-area{
     flex:1;
@@ -104,18 +162,24 @@ body{
     padding:18px;
     border-radius:18px;
     line-height:1.7;
+
     animation:fadeIn .4s ease;
 }
 
 .ai{
     background:rgba(0,170,255,0.12);
+
     border:1px solid rgba(0,200,255,0.25);
-    box-shadow:0 0 15px rgba(0,170,255,0.15);
+
+    box-shadow:
+    0 0 15px rgba(0,170,255,0.15);
 }
 
 .user{
     margin-left:auto;
+
     background:rgba(255,255,255,0.08);
+
     border:1px solid rgba(255,255,255,0.12);
 }
 
@@ -126,58 +190,108 @@ body{
 }
 
 @keyframes fadeIn{
-    from{ opacity:0; transform:translateY(10px); }
-    to{ opacity:1; transform:translateY(0); }
+
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
 }
+
+/* INPUT */
 
 .input-area{
     display:flex;
     padding:25px;
     gap:15px;
+
     border-top:1px solid rgba(255,255,255,0.08);
+
     background:rgba(255,255,255,0.03);
+
     backdrop-filter:blur(10px);
+
     z-index:2;
 }
 
 .input-area input{
     flex:1;
+
     padding:18px;
+
     border:none;
+
     border-radius:16px;
+
     background:rgba(255,255,255,0.08);
+
     color:white;
+
     font-size:16px;
+
     outline:none;
 }
 
 .input-area button{
     padding:18px 28px;
+
     border:none;
+
     border-radius:16px;
+
     background:#7cecff;
+
     color:black;
+
     font-weight:bold;
+
     cursor:pointer;
+
     transition:.3s;
 }
 
 .input-area button:hover{
     transform:scale(1.05);
-    box-shadow:0 0 20px #00d9ff;
+
+    box-shadow:
+    0 0 20px #00d9ff;
 }
+
+/* HERO */
 
 .logo{
     width:160px;
+
     margin-bottom:20px;
-    filter:drop-shadow(0 0 25px #00d9ff);
+
+    filter:
+    drop-shadow(0 0 25px #00d9ff);
+
     animation:pulse 4s infinite ease-in-out;
 }
 
 @keyframes pulse{
-    0%{ transform:scale(1); opacity:.9; }
-    50%{ transform:scale(1.05); opacity:1; }
-    100%{ transform:scale(1); opacity:.9; }
+
+    0%{
+        transform:scale(1);
+        opacity:.9;
+    }
+
+    50%{
+        transform:scale(1.05);
+        opacity:1;
+    }
+
+    100%{
+        transform:scale(1);
+        opacity:.9;
+    }
+
 }
 
 .hero{
@@ -187,25 +301,55 @@ body{
 
 .hero h1{
     font-size:62px;
+
     color:#8cefff;
-    text-shadow:0 0 12px #00aaff, 0 0 30px #00d9ff;
+
+    text-shadow:
+    0 0 12px #00aaff,
+    0 0 30px #00d9ff;
+
     margin-bottom:15px;
 }
 
 .hero p{
     font-size:21px;
+
     color:#ddd;
+
     max-width:850px;
+
     margin:auto;
+
     line-height:1.6;
 }
 
+/* MOBILE */
+
 @media(max-width:768px){
-    .sidebar{ display:none; }
-    .message{ max-width:95%; }
-    .hero h1{ font-size:38px; }
-    .header h2{ font-size:26px; }
+
+    .sidebar{
+        display:none;
+    }
+
+    .message{
+        max-width:95%;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    .header h2{
+        font-size:26px;
+    }
+
+    .header-top{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
 }
+
 </style>
 </head>
 
@@ -213,10 +357,14 @@ body{
 
 <div class="container">
 
+    <!-- SIDEBAR -->
+
     <div class="sidebar">
+
         <h1>AZRAEL AI</h1>
 
         <div class="status-box">
+
             • System Status:
             <span class="online">ONLINE</span><br>
 
@@ -224,47 +372,96 @@ body{
             <span class="online">ACTIVE</span><br>
 
             • Knowledge Base:
-            <span style="color:#ffd166;">TESTING</span><br>
+            <span style="color:#ffd166;">
+                TESTING
+            </span><br>
 
             • Public Access:
-            <span style="color:#ffd166;">LIMITED</span>
+            <span style="color:#ffd166;">
+                LIMITED
+            </span>
+
         </div>
+
     </div>
+
+    <!-- MAIN -->
 
     <div class="main">
 
+        <!-- HEADER -->
+
         <div class="header">
-            <h2>AZRAEL TERMINAL</h2>
+
+            <div class="header-top">
+
+                <h2>AZRAEL TERMINAL</h2>
+
+                <a href="index.html"
+                class="back-btn">
+
+                    ← Return Home
+
+                </a>
+
+            </div>
+
         </div>
+
+        <!-- CHAT -->
 
         <div class="chat-area" id="chat-area">
 
             <div class="hero">
-                <img src="logo.png" class="logo" alt="Azrael Systems Logo">
+
+                <img src="logo.png"
+                class="logo"
+                alt="Azrael Systems Logo">
 
                 <h1>AZRAEL SYSTEMS</h1>
 
                 <p>
-                    Advanced artificial intelligence systems for automation,
-                    research, knowledge, and private infrastructure.
+                    Advanced artificial intelligence systems
+                    for automation, research, knowledge,
+                    and private infrastructure.
                 </p>
+
             </div>
 
             <div class="message ai">
+
                 <strong>Azrael:</strong><br>
-                Welcome to Azrael AI. System interface initialized.
+
+                Welcome to Azrael AI.
+                System interface initialized.
+
             </div>
 
             <div class="message ai">
+
                 <strong>Azrael:</strong><br>
-                This is an early demo interface. Full AI intelligence will connect later through a backend model system.
+
+                This is an early demo interface.
+                Full AI intelligence will connect later
+                through a backend model system.
+
             </div>
 
         </div>
 
+        <!-- INPUT -->
+
         <div class="input-area">
-            <input type="text" id="user-input" placeholder="Message Azrael...">
-            <button id="send-btn">Send</button>
+
+            <input
+            type="text"
+            id="user-input"
+            placeholder="Message Azrael...">
+
+            <button id="send-btn">
+                Send
+            </button>
+
         </div>
 
     </div>
@@ -272,143 +469,220 @@ body{
 </div>
 
 <script>
-const input = document.getElementById("user-input");
-const sendBtn = document.getElementById("send-btn");
-const chatArea = document.getElementById("chat-area");
+
+const input =
+document.getElementById("user-input");
+
+const sendBtn =
+document.getElementById("send-btn");
+
+const chatArea =
+document.getElementById("chat-area");
+
+/* SANITIZE */
 
 function clean(text){
-    return text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+    return text
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
 }
 
+/* ADD MESSAGE */
+
 function addMessage(text, type = "ai"){
-    const msg = document.createElement("div");
+
+    const msg =
+    document.createElement("div");
+
     msg.classList.add("message");
     msg.classList.add(type);
 
     if(type === "user"){
-        msg.innerHTML = `<strong>You:</strong><br>${clean(text)}`;
+
+        msg.innerHTML =
+        `<strong>You:</strong><br>${clean(text)}`;
+
     } else {
-        msg.innerHTML = `<strong>Azrael:</strong><br>${text}`;
+
+        msg.innerHTML =
+        `<strong>Azrael:</strong><br>${text}`;
+
     }
 
     chatArea.appendChild(msg);
-    chatArea.scrollTop = chatArea.scrollHeight;
+
+    chatArea.scrollTop =
+    chatArea.scrollHeight;
 }
 
+/* TYPING */
+
 function showTyping(){
-    const typing = document.createElement("div");
-    typing.className = "message ai typing";
+
+    const typing =
+    document.createElement("div");
+
+    typing.className =
+    "message ai typing";
+
     typing.id = "typing";
-    typing.innerHTML = "<strong>Azrael:</strong><br>Processing request...";
+
+    typing.innerHTML =
+    "<strong>Azrael:</strong><br>Processing request...";
+
     chatArea.appendChild(typing);
-    chatArea.scrollTop = chatArea.scrollHeight;
+
+    chatArea.scrollTop =
+    chatArea.scrollHeight;
 }
 
 function removeTyping(){
-    const typing = document.getElementById("typing");
+
+    const typing =
+    document.getElementById("typing");
+
     if(typing){
         typing.remove();
     }
+
 }
+
+/* AI RESPONSES */
 
 function fakeResponse(message){
-    const lower = message.toLowerCase();
 
-    if(lower.includes("who are you") || lower.includes("what are you")){
-        return "I am Azrael, an early-stage AI interface designed for research, automation, knowledge management, document intelligence, and local-first AI workflows.";
+    const lower =
+    message.toLowerCase();
+
+    if(lower.includes("who are you")
+    || lower.includes("what are you")){
+
+        return "I am Azrael, an AI systems interface focused on automation, research, document intelligence, and local-first workflows.";
     }
 
-    if(lower.includes("what can you do") || lower.includes("help me")){
-        return "I can assist with planning, research, business ideas, document organization, workflow design, AI strategy, trucking systems, real estate analysis, and productivity automation. This demo is not connected to a live model yet, but the interface is being prepared for that future connection.";
+    if(lower.includes("what can you do")
+    || lower.includes("help")){
+
+        return "I can assist with research, strategy, planning, automation ideas, AI infrastructure concepts, document workflows, business analysis, and intelligent productivity systems.";
     }
 
-    if(lower.includes("privacy") || lower.includes("private")){
-        return "Azrael Systems is being designed around privacy-focused and local-first AI workflows. That means the long-term goal is to give users more control over data, documents, and AI infrastructure.";
+    if(lower.includes("privacy")
+    || lower.includes("private")){
+
+        return "Azrael Systems is being designed around privacy-focused and local-first AI infrastructure to give users greater control over their data and workflows.";
     }
 
-    if(lower.includes("local ai") || lower.includes("ollama") || lower.includes("open webui")){
-        return "Local AI allows models to run on private hardware instead of depending completely on cloud systems. Azrael can eventually connect local tools like Ollama, Open WebUI, private documents, and custom workflows.";
+    if(lower.includes("trucking")
+    || lower.includes("dispatch")){
+
+        return "AI systems can optimize trucking through route analysis, dispatch automation, maintenance tracking, fuel optimization, and intelligent logistics workflows.";
     }
 
-    if(lower.includes("document") || lower.includes("pdf") || lower.includes("book") || lower.includes("manual")){
-        return "Document intelligence is one of Azrael's core goals. The system is being designed to help organize, summarize, search, and reason over PDFs, manuals, notes, books, and private knowledge bases.";
+    if(lower.includes("real estate")
+    || lower.includes("property")){
+
+        return "AI can support real estate analysis, document organization, property comparisons, financial projections, and investment planning.";
     }
 
-    if(lower.includes("automation") || lower.includes("workflow")){
-        return "Automation can turn repeated tasks into intelligent workflows. Azrael is being developed with future automation in mind, including reminders, research tasks, document sorting, planning, and business productivity.";
+    if(lower.includes("business")
+    || lower.includes("startup")){
+
+        return "Strong startups focus on execution, product quality, user growth, branding, and solving real problems through scalable systems.";
     }
 
-    if(lower.includes("business") || lower.includes("startup") || lower.includes("investor")){
-        return "For a startup, the strongest path is building a clear product, showing progress, gaining users, and proving demand. Azrael Systems is currently in early development, focused on branding, infrastructure, and prototype interfaces.";
+    if(lower.includes("automation")){
+
+        return "Automation systems can reduce repetitive tasks and improve efficiency through intelligent workflows and task orchestration.";
     }
 
-    if(lower.includes("trucking") || lower.includes("dispatch") || lower.includes("logistics")){
-        return "AI can support trucking and logistics through route planning, dispatch support, load organization, maintenance tracking, fuel efficiency analysis, and document automation.";
+    if(lower.includes("documents")
+    || lower.includes("pdf")){
+
+        return "Document intelligence is a core goal of Azrael Systems, including analysis, organization, summarization, and knowledge extraction.";
     }
 
-    if(lower.includes("real estate") || lower.includes("house") || lower.includes("property")){
-        return "AI can help with real estate by comparing properties, organizing documents, estimating costs, analyzing loan options, tracking repairs, and helping plan investment strategies.";
+    if(lower.includes("ai")){
+
+        return "Artificial intelligence systems can assist with reasoning, automation, research, knowledge management, and intelligent workflows.";
     }
 
-    if(lower.includes("credit") || lower.includes("debt") || lower.includes("finance")){
-        return "Azrael could assist with financial organization by tracking debts, summarizing credit reports, planning payoff strategies, and helping users understand financial documents.";
+    if(lower.includes("hello")
+    || lower.includes("hi")){
+
+        return "System online. Hello. How may Azrael assist you today?";
     }
 
-    if(lower.includes("website") || lower.includes("domain")){
-        return "Azrael Systems currently has a live web presence, custom domain, GitHub workflow, and Vercel deployment. The next major step is connecting the frontend interface to a real AI backend.";
-    }
+    const responses = [
 
-    if(lower.includes("hello") || lower.includes("hi") || lower.includes("hey")){
-        return "System active. Hello. I am Azrael. How can I assist with your research, automation, documents, or AI infrastructure planning?";
-    }
+        "Azrael is analyzing the request and organizing the available information into a structured response.",
 
-    if(lower.includes("legal") || lower.includes("court") || lower.includes("custody")){
-        return "Azrael can eventually help organize legal documents, timelines, evidence, notes, and case information. It should not replace a licensed attorney, but it can help structure information clearly.";
-    }
+        "That topic can be approached through strategy, planning, automation, and intelligent workflow design.",
 
-    if(lower.includes("code") || lower.includes("coding") || lower.includes("program")){
-        return "Azrael can help plan software systems, explain code, organize project files, design interfaces, and build AI workflows. A real backend model connection will make this much stronger later.";
-    }
+        "A practical solution would involve identifying the goal, evaluating constraints, and building a phased implementation strategy.",
 
-    if(lower.includes("plan") || lower.includes("strategy")){
-        return "A strong strategy starts with defining the goal, breaking it into phases, identifying risks, building the smallest useful version, then improving it through testing and feedback.";
-    }
+        "Azrael recommends focusing on scalable systems, organization, and efficient infrastructure design.",
 
-    const generalResponses = [
-        "I understand. A strong approach would be to break this into smaller parts, identify the goal, then build a practical step-by-step plan.",
-        "That topic can be analyzed through strategy, risk, tools, cost, and execution. Azrael would begin by identifying what outcome you want and what resources are available.",
-        "Processing complete. The best path is usually to define the problem clearly, gather useful information, compare options, and create an action plan.",
-        "Azrael can assist by organizing the topic, identifying key details, and turning the idea into a structured workflow or decision plan.",
-        "That request fits the Azrael framework: analyze the situation, organize the data, reduce complexity, and recommend practical next steps."
+        "The request has been processed. Further optimization and intelligent workflow analysis are recommended."
+
     ];
 
-    return generalResponses[Math.floor(Math.random() * generalResponses.length)];
+    return responses[
+        Math.floor(
+            Math.random() * responses.length
+        )
+    ];
 }
 
+/* SEND MESSAGE */
+
 function sendMessage(){
-    const text = input.value.trim();
+
+    const text =
+    input.value.trim();
 
     if(!text) return;
 
     addMessage(text, "user");
+
     input.value = "";
 
     showTyping();
 
     setTimeout(() => {
+
         removeTyping();
-        const response = fakeResponse(text);
+
+        const response =
+        fakeResponse(text);
+
         addMessage(response, "ai");
+
     }, 900);
 }
 
-sendBtn.addEventListener("click", sendMessage);
+/* BUTTON */
 
-input.addEventListener("keypress", function(e){
+sendBtn.addEventListener(
+"click",
+sendMessage
+);
+
+/* ENTER KEY */
+
+input.addEventListener(
+"keypress",
+function(e){
+
     if(e.key === "Enter"){
+
         sendMessage();
+
     }
+
 });
+
 </script>
 
 </body>

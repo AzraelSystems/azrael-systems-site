@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Azrael AI Terminal</title>
+<title>Azrael AI Prototype Terminal</title>
 
 <style>
 
@@ -365,20 +365,20 @@ body{
 
         <div class="status-box">
 
-            • System Status:
-            <span class="online">ONLINE</span><br>
+            • Interface:
+            <span class="online">DEMO</span><br>
 
-            • Local Infrastructure:
-            <span class="online">ACTIVE</span><br>
+            • Replies:
+            <span class="online">SCRIPTED</span><br>
 
-            • Knowledge Base:
+            • Azrael AI:
             <span style="color:#ffd166;">
-                TESTING
+                IN DEVELOPMENT
             </span><br>
 
-            • Public Access:
+            • Product Access:
             <span style="color:#ffd166;">
-                LIMITED
+                NOT AVAILABLE
             </span>
 
         </div>
@@ -395,7 +395,7 @@ body{
 
             <div class="header-top">
 
-                <h2>AZRAEL TERMINAL</h2>
+                <h2>AZRAEL PROTOTYPE</h2>
 
                 <a href="index.html"
                 class="back-btn">
@@ -421,9 +421,7 @@ body{
                 <h1>AZRAEL SYSTEMS</h1>
 
                 <p>
-                    Advanced artificial intelligence systems
-                    for automation, research, knowledge,
-                    and private infrastructure.
+                    An interactive demo of the Azrael AI chat interface.
                 </p>
 
             </div>
@@ -432,8 +430,7 @@ body{
 
                 <strong>Azrael:</strong><br>
 
-                Welcome to Azrael AI.
-                System interface initialized.
+                Welcome to the Azrael AI prototype.
 
             </div>
 
@@ -441,9 +438,8 @@ body{
 
                 <strong>Azrael:</strong><br>
 
-                This is an early demo interface.
-                Full AI intelligence will connect later
-                through a backend model system.
+                This demo uses scripted replies and does not connect to the Azrael AI backend.
+                Azrael AI is still in development and has not launched publicly.
 
             </div>
 
@@ -456,7 +452,7 @@ body{
             <input
             type="text"
             id="user-input"
-            placeholder="Message Azrael...">
+            placeholder="Try a demo message...">
 
             <button id="send-btn">
                 Send
@@ -530,7 +526,7 @@ function showTyping(){
     typing.id = "typing";
 
     typing.innerHTML =
-    "<strong>Azrael:</strong><br>Processing request...";
+    "<strong>Azrael:</strong><br>Preparing demo reply...";
 
     chatArea.appendChild(typing);
 
@@ -559,72 +555,72 @@ function fakeResponse(message){
     if(lower.includes("who are you")
     || lower.includes("what are you")){
 
-        return "I am Azrael, an AI systems interface focused on automation, research, document intelligence, and local-first workflows.";
+        return "This is a scripted preview of Azrael AI, an assistant in development for conversation, research, and everyday work.";
     }
 
     if(lower.includes("what can you do")
     || lower.includes("help")){
 
-        return "I can assist with research, strategy, planning, automation ideas, AI infrastructure concepts, document workflows, business analysis, and intelligent productivity systems.";
+        return "This demo shows the chat interface. Advanced research, document analysis, coding assistance, and workflow automation are planned for Azrael AI.";
     }
 
     if(lower.includes("privacy")
     || lower.includes("private")){
 
-        return "Azrael Systems is being designed around privacy-focused and local-first AI infrastructure to give users greater control over their data and workflows.";
+        return "This demo runs in your browser and uses scripted replies. It does not connect to the Azrael AI backend.";
     }
 
     if(lower.includes("trucking")
     || lower.includes("dispatch")){
 
-        return "AI systems can optimize trucking through route analysis, dispatch automation, maintenance tracking, fuel optimization, and intelligent logistics workflows.";
+        return "Tools for specialized industries are a future direction. This demo doesn't perform dispatch or logistics tasks.";
     }
 
     if(lower.includes("real estate")
     || lower.includes("property")){
 
-        return "AI can support real estate analysis, document organization, property comparisons, financial projections, and investment planning.";
+        return "Tools for specialized industries are a future direction. This demo doesn't analyze properties or real estate documents.";
     }
 
     if(lower.includes("business")
     || lower.includes("startup")){
 
-        return "Strong startups focus on execution, product quality, user growth, branding, and solving real problems through scalable systems.";
+        return "Azrael Systems is developing Azrael AI to help individuals and businesses accomplish more and spend less time on everyday tasks.";
     }
 
     if(lower.includes("automation")){
 
-        return "Automation systems can reduce repetitive tasks and improve efficiency through intelligent workflows and task orchestration.";
+        return "Workflow automation is planned to help people spend less time on repetitive tasks.";
     }
 
     if(lower.includes("documents")
     || lower.includes("pdf")){
 
-        return "Document intelligence is a core goal of Azrael Systems, including analysis, organization, summarization, and knowledge extraction.";
+        return "Document analysis is planned for Azrael AI. This demo doesn't read or analyze files.";
     }
 
     if(lower.includes("ai")){
 
-        return "Artificial intelligence systems can assist with reasoning, automation, research, knowledge management, and intelligent workflows.";
+        return "Conversational AI chat is implemented in development. This prototype uses scripted replies to show what the interface looks like.";
     }
 
     if(lower.includes("hello")
     || lower.includes("hi")){
 
-        return "Hello. What can I help you with today?";
+        return "Hello. Try asking 'What can you do?' to see a sample reply.";
     }
 
     const responses = [
 
-        "Azrael is analyzing the request and organizing the available information into a structured response.",
+        "This is a scripted demo. Try asking 'Who are you?'",
 
-        "That topic can be approached through strategy, planning, automation, and intelligent workflow design.",
+        "Try a sample question about documents or automation.",
 
-        "A practical solution would involve identifying the goal, evaluating constraints, and building a phased implementation strategy.",
+        "This interface previews how a conversation could look. The replies are scripted.",
 
-        "Azrael recommends focusing on scalable systems, organization, and efficient infrastructure design.",
+        "Try asking 'What can you do?' for a look at the planned features.",
 
-        "The request has been processed. Further optimization and intelligent workflow analysis are recommended."
+        "This demo shows a sample conversation with scripted replies."
 
     ];
 

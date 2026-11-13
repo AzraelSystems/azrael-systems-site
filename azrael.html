@@ -2,684 +2,197 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Azrael AI Prototype Terminal</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Preview the next Azrael conversational interface: one chat, a voice-reactive orb, and tools that appear when needed. This demo uses scripted responses.">
+<title>Meet Azrael — Interface Preview</title>
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
-
-body{
-    background:
-    radial-gradient(circle at top, #0d1b2a, #05070d 70%);
-    color:white;
-    overflow:hidden;
-}
-
-/* LAYOUT */
-
-.container{
-    display:flex;
-    height:100vh;
-}
-
-/* SIDEBAR */
-
-.sidebar{
-    width:260px;
-    background:rgba(255,255,255,0.04);
-    border-right:1px solid rgba(0,255,255,0.15);
-    padding:25px;
-    backdrop-filter:blur(10px);
-}
-
-.sidebar h1{
-    font-size:34px;
-    margin-bottom:30px;
-    color:#7cecff;
-    text-shadow:0 0 15px #00aaff;
-}
-
-.status-box{
-    padding:18px;
-    border-radius:18px;
-    background:rgba(255,255,255,0.03);
-    border:1px solid rgba(255,255,255,0.08);
-    line-height:2;
-}
-
-.online{
-    color:#4dff88;
-    font-weight:bold;
-}
-
-/* MAIN */
-
-.main{
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    position:relative;
-    overflow:hidden;
-}
-
-/* ANIMATED GRID */
-
-.main::before{
-    content:"";
-    position:absolute;
-    inset:0;
-
-    background-image:
-    linear-gradient(rgba(0,255,255,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,255,255,0.06) 1px, transparent 1px);
-
-    background-size:40px 40px;
-
-    animation:gridMove 18s linear infinite;
-
-    pointer-events:none;
-}
-
-@keyframes gridMove{
-    from{
-        transform:translateY(0px);
-    }
-
-    to{
-        transform:translateY(40px);
-    }
-}
-
-/* HEADER */
-
-.header{
-    padding:25px 35px;
-    border-bottom:1px solid rgba(255,255,255,0.08);
-    background:rgba(255,255,255,0.03);
-    backdrop-filter:blur(10px);
-    z-index:2;
-}
-
-.header-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:20px;
-}
-
-.header h2{
-    color:#8cefff;
-    font-size:38px;
-
-    text-shadow:
-    0 0 20px #00aaff;
-}
-
-/* RETURN BUTTON */
-
-.back-btn{
-    padding:12px 18px;
-    border-radius:12px;
-    text-decoration:none;
-
-    background:rgba(255,255,255,0.06);
-    border:1px solid rgba(0,217,255,.25);
-
-    color:#7cecff;
-
-    transition:.3s;
-
-    font-size:14px;
-}
-
-.back-btn:hover{
-    background:rgba(0,217,255,.12);
-
-    transform:scale(1.05);
-
-    box-shadow:
-    0 0 18px rgba(0,217,255,.25);
-}
-
-/* CHAT AREA */
-
-.chat-area{
-    flex:1;
-    padding:35px;
-    overflow-y:auto;
-    z-index:2;
-}
-
-.message{
-    max-width:70%;
-    margin-bottom:20px;
-    padding:18px;
-    border-radius:18px;
-    line-height:1.7;
-
-    animation:fadeIn .4s ease;
-}
-
-.ai{
-    background:rgba(0,170,255,0.12);
-
-    border:1px solid rgba(0,200,255,0.25);
-
-    box-shadow:
-    0 0 15px rgba(0,170,255,0.15);
-}
-
-.user{
-    margin-left:auto;
-
-    background:rgba(255,255,255,0.08);
-
-    border:1px solid rgba(255,255,255,0.12);
-}
-
-.typing{
-    color:#7cecff;
-    font-style:italic;
-    opacity:.8;
-}
-
-@keyframes fadeIn{
-
-    from{
-        opacity:0;
-        transform:translateY(10px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-}
-
-/* INPUT */
-
-.input-area{
-    display:flex;
-    padding:25px;
-    gap:15px;
-
-    border-top:1px solid rgba(255,255,255,0.08);
-
-    background:rgba(255,255,255,0.03);
-
-    backdrop-filter:blur(10px);
-
-    z-index:2;
-}
-
-.input-area input{
-    flex:1;
-
-    padding:18px;
-
-    border:none;
-
-    border-radius:16px;
-
-    background:rgba(255,255,255,0.08);
-
-    color:white;
-
-    font-size:16px;
-
-    outline:none;
-}
-
-.input-area button{
-    padding:18px 28px;
-
-    border:none;
-
-    border-radius:16px;
-
-    background:#7cecff;
-
-    color:black;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-.input-area button:hover{
-    transform:scale(1.05);
-
-    box-shadow:
-    0 0 20px #00d9ff;
-}
-
-/* HERO */
-
-.logo{
-    width:160px;
-
-    margin-bottom:20px;
-
-    filter:
-    drop-shadow(0 0 25px #00d9ff);
-
-    animation:pulse 4s infinite ease-in-out;
-}
-
-@keyframes pulse{
-
-    0%{
-        transform:scale(1);
-        opacity:.9;
-    }
-
-    50%{
-        transform:scale(1.05);
-        opacity:1;
-    }
-
-    100%{
-        transform:scale(1);
-        opacity:.9;
-    }
-
-}
-
-.hero{
-    text-align:center;
-    margin-bottom:35px;
-}
-
-.hero h1{
-    font-size:62px;
-
-    color:#8cefff;
-
-    text-shadow:
-    0 0 12px #00aaff,
-    0 0 30px #00d9ff;
-
-    margin-bottom:15px;
-}
-
-.hero p{
-    font-size:21px;
-
-    color:#ddd;
-
-    max-width:850px;
-
-    margin:auto;
-
-    line-height:1.6;
-}
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-    .sidebar{
-        display:none;
-    }
-
-    .message{
-        max-width:95%;
-    }
-
-    .hero h1{
-        font-size:38px;
-    }
-
-    .header h2{
-        font-size:26px;
-    }
-
-    .header-top{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
-}
-
+:root{color-scheme:dark;--bg:#030711;--panel:#0b1424;--border:rgba(140,198,248,.16);--sub:#93a8c1;--blue:#61cbff;--text:#f1f7ff}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text)}
+button,input{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid #80dbff;outline-offset:3px}
+.layout{height:100dvh;min-height:520px;display:grid;grid-template-columns:250px minmax(0,1fr);background:radial-gradient(ellipse at 52% 35%,#102a55 0,transparent 45%),#030711}
+.sidebar{background:rgba(6,12,25,.90);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:25px 16px;gap:18px}
+.brand{font-size:13px;font-weight:800;letter-spacing:.22em;text-decoration:none;color:#e7f5ff}.brand small{display:block;font-size:9px;font-weight:500;letter-spacing:.3em;color:var(--sub);margin-top:7px}
+.sidebar p{font-size:12px;color:#7792ac;line-height:1.7;margin:0}
+.link{color:#cbe9ff;text-decoration:none;border:1px solid var(--border);padding:12px;border-radius:13px;text-align:center;font-size:13px}
+.conversation{padding:14px;border-radius:14px;border:1px solid rgba(97,203,255,.26);background:rgba(40,103,180,.12);font-size:13px}
+.conversation small{color:var(--sub);display:block;margin-top:6px;font-size:11px}
+.sidebar .spacer{flex:1}
+.main{min-width:0;min-height:0;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.main:before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(#78baff0a 1px,transparent 1px),linear-gradient(90deg,#78baff0a 1px,transparent 1px);background-size:54px 54px;mask-image:linear-gradient(#000,transparent 85%)}
+.toolbar{z-index:2;display:flex;align-items:center;justify-content:space-between;gap:14px;border-bottom:1px solid var(--border);padding:15px 27px;background:rgba(4,10,21,.8)}
+.toolbar h1{font-size:15px;letter-spacing:.17em;margin:0}.toolbar p{font-size:11px;color:var(--sub);margin:5px 0 0}
+.tool-actions{display:flex;gap:10px}
+.icon-btn{border:1px solid var(--border);color:#c6e8ff;background:rgba(255,255,255,.03);width:43px;height:43px;border-radius:13px;display:grid;place-items:center}
+.icon-btn:hover{border-color:rgba(97,203,255,.6);background:rgba(78,146,210,.1)}
+.chat-scroll{z-index:1;flex:1;min-height:0;overflow:auto;scrollbar-color:#203850 transparent}
+.chat-inner{width:min(740px,100%);min-height:100%;margin:0 auto;padding:22px 23px 36px;display:flex;flex-direction:column}
+.welcome{text-align:center;margin:auto 0 30px;display:flex;flex-direction:column;align-items:center;gap:13px}
+.welcome h2{font-size:clamp(28px,4vw,40px);letter-spacing:-.035em;margin:3px 0 0}
+.welcome p{max-width:490px;font-size:14px;line-height:1.65;color:var(--sub);margin:0}
+.status{font-size:11px;letter-spacing:.23em;font-weight:700;color:#88d9ff;margin-top:3px}
+.orb{width:236px;height:236px;display:grid;place-items:center;position:relative;isolation:isolate;filter:drop-shadow(0 0 18px #0085ff65)}
+.orb::before{content:"";position:absolute;inset:12%;border-radius:50%;background:radial-gradient(circle at 52% 56%,#d0f9ff 0 3%,#17beff 4%,#053c98 16%,#031b40 37%,#001331 61%,#031127 71%);box-shadow:inset 0 0 33px #00b3ff90,0 0 48px #008cff65;animation:breathe 5s ease-in-out infinite}
+.orb::after{content:"";position:absolute;inset:2%;border:1px solid #55cfff66;border-radius:50%;box-shadow:inset 0 0 23px #16bcff36,0 0 35px #05a6ff35;animation:breathe 6s ease-in-out infinite reverse}
+.orb .ring{position:absolute;border:3px solid transparent;border-top-color:#9af1ff;border-bottom-color:#109fff;border-radius:50%;inset:13%;box-shadow:0 0 16px #32bfffbb;animation:rotate 17s linear infinite}
+.orb .ring.two{inset:17% 3%;transform:rotate(55deg);opacity:.7;animation:rotate-reverse 12s linear infinite}
+.orb .ring.three{inset:3% 17%;transform:rotate(-40deg);opacity:.55;animation:rotate 20s linear infinite}
+.orb svg{width:40%;position:relative;z-index:3;filter:drop-shadow(0 0 11px #baf4ffb0);color:#ceefff}
+.orb.speaking::before{animation:speaking 650ms ease-in-out infinite alternate}
+.orb.speaking .ring{animation-duration:3s}
+.orb.listening::before{box-shadow:inset 0 0 42px #63f0ff,0 0 56px #16bbff}
+.orb.thinking .ring{animation-duration:5s}
+.orb .ripple{position:absolute;inset:9%;border:2px solid #8deaff;border-radius:50%;opacity:0;pointer-events:none}
+.orb.speaking .ripple{animation:ripple 850ms ease-out infinite}
+@keyframes rotate{to{transform:rotate(360deg)}}@keyframes rotate-reverse{to{transform:rotate(-360deg)}}
+@keyframes breathe{50%{transform:scale(1.055);opacity:.85}}
+@keyframes speaking{to{transform:scale(1.10);filter:brightness(1.35)}}
+@keyframes ripple{0%{opacity:.8;transform:scale(.76)}100%{opacity:0;transform:scale(1.30)}}
+.messages{display:flex;flex-direction:column;gap:16px;padding-bottom:12px}
+.message{font-size:14px;line-height:1.7;padding:14px 17px;border:1px solid var(--border);border-radius:18px;max-width:90%;white-space:pre-wrap;overflow-wrap:anywhere}
+.message.bot{align-self:flex-start;background:rgba(11,24,45,.85);color:#e7f5ff;border-bottom-left-radius:5px}
+.message.user{align-self:flex-end;background:rgba(23,94,174,.58);border-bottom-right-radius:5px}
+.message small{display:block;letter-spacing:.09em;text-transform:uppercase;font-size:10px;margin-bottom:7px;color:#8cd3ff}
+.disclaimer{color:#9eb4cc;opacity:.88;font-size:11px;line-height:1.5;margin:8px auto 0;text-align:center}
+.composer{z-index:2;border-top:1px solid var(--border);padding:14px 22px 18px;background:linear-gradient(transparent,#060d1c 14%)}
+.composer form{display:flex;align-items:center;gap:8px;border:1px solid #3d6a967a;border-radius:19px;background:#0a1628;padding:8px;max-width:740px;margin:0 auto}
+.composer input{min-width:0;flex:1;padding:12px 8px;color:var(--text);background:transparent;border:0;outline:0;font-size:15px}
+.composer input::placeholder{color:#7691aa}
+.send{border:0;padding:10px 15px;border-radius:11px;background:#53bdf4;color:#04101d;font-weight:700;min-height:40px}
+.send:hover{background:#8fddff}
+.composer .disclaimer{max-width:740px}
+.drawer{position:fixed;z-index:12;right:0;top:0;bottom:0;width:min(410px,100vw);background:#081120;box-shadow:-25px 0 80px #0009;border-left:1px solid var(--border);padding:25px;overflow-y:auto}
+.drawer[hidden],.backdrop[hidden]{display:none}
+.drawer h2{margin:0 0 6px;font-size:25px}.drawer p{color:var(--sub);font-size:13px;line-height:1.7}
+.setting{padding:17px 0;border-bottom:1px solid var(--border)}
+.setting h3{font-size:14px;margin:0}.setting p{margin:7px 0 0}.setting span{font-size:10px;color:#70c6fc;letter-spacing:.1em;text-transform:uppercase}
+.backdrop{position:fixed;inset:0;z-index:11;background:#01050dcc}
+.drawer-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+.mobile-nav{display:none}
+@media(max-width:780px){.layout{grid-template-columns:1fr}.sidebar{display:none}.mobile-nav{display:inline-flex}.toolbar{padding:13px 16px}.chat-inner{padding:12px 16px 28px}.orb{width:190px;height:190px}.welcome{margin-top:22px}.composer{padding:12px}.message{max-width:96%}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
-
 <body>
-
-<div class="container">
-
-    <!-- SIDEBAR -->
-
-    <div class="sidebar">
-
-        <h1>AZRAEL AI</h1>
-
-        <div class="status-box">
-
-            • Interface:
-            <span class="online">DEMO</span><br>
-
-            • Replies:
-            <span class="online">SCRIPTED</span><br>
-
-            • Azrael AI:
-            <span style="color:#ffd166;">
-                IN DEVELOPMENT
-            </span><br>
-
-            • Product Access:
-            <span style="color:#ffd166;">
-                NOT AVAILABLE
-            </span>
-
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="brand">AZRAEL SYSTEMS<small>REAL INTELLIGENCE. REAL SYSTEMS.</small></a>
+    <p>One assistant. One conversation. Capabilities when you need them.</p>
+    <div class="conversation">New conversation<small>Preview session only</small></div>
+    <div class="spacer"></div>
+    <a class="link" href="index.html">← Back to website</a>
+  </aside>
+  <main class="main">
+    <header class="toolbar">
+      <div>
+        <h1>AZRAEL <span style="color:#85dfff">•</span> VOICE &amp; CHAT</h1>
+        <p>Design prototype · scripted replies · not live AI</p>
+      </div>
+      <div class="tool-actions">
+        <a href="index.html" class="icon-btn mobile-nav" aria-label="Back to website" title="Home">⌂</a>
+        <button class="icon-btn" id="speech-toggle" type="button" aria-label="Enable spoken replies" title="Enable spoken replies">♫</button>
+        <button class="icon-btn" id="settings-open" type="button" aria-label="Open settings preview" title="Settings preview">⚙</button>
+      </div>
+    </header>
+    <div class="chat-scroll" id="chat-scroll">
+      <div class="chat-inner">
+        <div class="welcome">
+          <div id="orb" class="orb" role="img" aria-label="Azrael is ready">
+            <span class="ring"></span><span class="ring two"></span><span class="ring three"></span><span class="ripple"></span>
+            <svg viewBox="0 0 120 120" fill="none" aria-hidden="true"><path d="M60 12 111 107H86L60 57 34 107H9L60 12Z" fill="currentColor"/><path d="M49 91H71" stroke="#9cefff" stroke-width="3"/></svg>
+          </div>
+          <h2>Talk to Azrael.</h2>
+          <p>A simpler way to get things done. Your conversations, your context, and the right tools — without switching between modes.</p>
+          <span id="orb-status" class="status" aria-live="polite">READY</span>
         </div>
-
+        <div id="messages" class="messages" aria-live="polite"></div>
+      </div>
     </div>
-
-    <!-- MAIN -->
-
-    <div class="main">
-
-        <!-- HEADER -->
-
-        <div class="header">
-
-            <div class="header-top">
-
-                <h2>AZRAEL PROTOTYPE</h2>
-
-                <a href="index.html"
-                class="back-btn">
-
-                    ← Return Home
-
-                </a>
-
-            </div>
-
-        </div>
-
-        <!-- CHAT -->
-
-        <div class="chat-area" id="chat-area">
-
-            <div class="hero">
-
-                <img src="logo.png"
-                class="logo"
-                alt="Azrael Systems Logo">
-
-                <h1>AZRAEL SYSTEMS</h1>
-
-                <p>
-                    An interactive demo of the Azrael AI chat interface.
-                </p>
-
-            </div>
-
-            <div class="message ai">
-
-                <strong>Azrael:</strong><br>
-
-                Welcome to the Azrael AI prototype.
-
-            </div>
-
-            <div class="message ai">
-
-                <strong>Azrael:</strong><br>
-
-                This demo uses scripted replies and does not connect to the Azrael AI backend.
-                Azrael AI is still in development and has not launched publicly.
-
-            </div>
-
-        </div>
-
-        <!-- INPUT -->
-
-        <div class="input-area">
-
-            <input
-            type="text"
-            id="user-input"
-            placeholder="Try a demo message...">
-
-            <button id="send-btn">
-                Send
-            </button>
-
-        </div>
-
+    <div class="composer">
+      <form id="composer">
+        <input id="message-input" aria-label="Message the demo" autocomplete="off" maxlength="1000" placeholder="Ask Azrael anything…" required>
+        <button class="icon-btn" type="button" id="mic" title="Voice input (if supported)" aria-label="Start voice input">🎙</button>
+        <button class="send" type="submit">Send</button>
+      </form>
+      <p class="disclaimer">Concept preview only. Replies are scripted, voice uses browser features when supported, and messages are not stored or sent to Azrael.</p>
     </div>
-
+  </main>
 </div>
-
+<div id="backdrop" class="backdrop" hidden></div>
+<section id="drawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="settings-title" hidden>
+  <div class="drawer-head"><h2 id="settings-title">Settings</h2><button id="settings-close" class="icon-btn" aria-label="Close settings">×</button></div>
+  <p>This is a design preview. Account management and integrations will be available only in the real authenticated Azrael application.</p>
+  <div class="setting"><h3>Profile editing</h3><p>Update your name, preferences and account details.</p><span>Planned for app</span></div>
+  <div class="setting"><h3>Memory &amp; history</h3><p>Search previous conversations, manage remembered details and temporary chats.</p><span>Being developed</span></div>
+  <div class="setting"><h3>Connected accounts</h3><p>Choose which services Azrael may access. Connections will require individual authorization and revocation controls.</p><span>Planned for app</span></div>
+  <div class="setting"><h3>Add-ons &amp; tools</h3><p>Browse available integrations without cluttering the main conversation.</p><span>Planned for app</span></div>
+  <div class="setting"><h3>Privacy &amp; security</h3><p>Control data access, export, retention and memory deletion.</p><span>Being developed</span></div>
+  <div class="setting"><h3>Sign out</h3><p>Sign-out appears here after signing in to the real app. This public prototype has no account session.</p><span>Preview only</span></div>
+  <a class="link" style="display:block;margin-top:22px" href="index.html">Return to Azrael Systems</a>
+</section>
 <script>
-
-const input =
-document.getElementById("user-input");
-
-const sendBtn =
-document.getElementById("send-btn");
-
-const chatArea =
-document.getElementById("chat-area");
-
-/* SANITIZE */
-
-function clean(text){
-
-    return text
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-
-}
-
-/* ADD MESSAGE */
-
-function addMessage(text, type = "ai"){
-
-    const msg =
-    document.createElement("div");
-
-    msg.classList.add("message");
-    msg.classList.add(type);
-
-    if(type === "user"){
-
-        msg.innerHTML =
-        `<strong>You:</strong><br>${clean(text)}`;
-
-    } else {
-
-        msg.innerHTML =
-        `<strong>Azrael:</strong><br>${text}`;
-
+(function(){
+  "use strict";
+  const $=id=>document.getElementById(id);
+  const input=$("message-input"),messages=$("messages"),scroll=$("chat-scroll"),orb=$("orb"),status=$("orb-status"),drawer=$("drawer"),backdrop=$("backdrop");
+  let speaking=false,recognizer=null,activeSpeech=false;
+  const synth=window.speechSynthesis;
+  function orbState(state){orb.classList.remove("speaking","listening","thinking"); if(state!=="ready") orb.classList.add(state);status.textContent=state.toUpperCase();orb.setAttribute("aria-label","Azrael is "+state);}
+  function addMessage(text,type){
+    const item=document.createElement("div");item.className="message "+type;
+    const name=document.createElement("small");name.textContent=type==="user"?"You":"Azrael · scripted demo";
+    const body=document.createElement("span");body.textContent=text;
+    item.append(name,body);messages.append(item);scroll.scrollTop=scroll.scrollHeight;
+  }
+  function replyFor(text){
+    const t=text.toLowerCase();
+    if(/route|trucking|fuel|gps|destination/.test(t)) return "In the planned experience, I would detect your truck-route request, compare truck-safe routes, and show maps and fuel stops only when needed. This prototype has no live navigation or fuel prices.";
+    if(/remember|memory|previous conversation|last time/.test(t)) return "Cross-conversation memory is one of Azrael's development priorities. Signed-in users will control what is retained and recalled. This public demo does not remember conversations.";
+    if(/setting|profile|account|addon|add-on|connect/.test(t)) return "Your profile, memory controls, linked services, add-ons, and sign-out will live under one Settings gear. Open the gear above to preview the organization.";
+    if(/voice|speak|talk|orb/.test(t)) return "The orb moves gently while idle, responds when listening, and pulses while speaking. Enable spoken replies using the music control in the upper right.";
+    if(/emergency|storm|alert/.test(t)) return "Emergency guidance will use verified official information. This prototype cannot detect alerts or give live emergency instructions.";
+    return "The future Azrael experience will be one continuous conversation, with memory and tools brought in when relevant. This is a scripted interface demonstration, not the live assistant.";
+  }
+  function speak(text){
+    if(!speaking||!synth||typeof SpeechSynthesisUtterance==="undefined"){orbState("ready");return;}
+    synth.cancel();const utterance=new SpeechSynthesisUtterance(text);
+    utterance.rate=.94;utterance.onstart=()=>orbState("speaking");utterance.onend=()=>orbState("ready");utterance.onerror=()=>orbState("ready");
+    synth.speak(utterance);
+  }
+  function send(){
+    const text=input.value.trim();if(!text)return;
+    if(synth)synth.cancel();input.value="";addMessage(text,"user");orbState("thinking");
+    window.setTimeout(()=>{const response=replyFor(text);addMessage(response,"bot");orbState("ready");speak(response)},500);
+  }
+  $("composer").addEventListener("submit",e=>{e.preventDefault();send()});
+  $("speech-toggle").addEventListener("click",()=>{
+    speaking=!speaking;$("speech-toggle").setAttribute("aria-label",speaking?"Disable spoken replies":"Enable spoken replies");
+    $("speech-toggle").setAttribute("aria-pressed",String(speaking));
+    $("speech-toggle").style.color=speaking?"#72d8ff":"#c6e8ff";
+    if(!speaking){if(synth)synth.cancel();orbState("ready");}
+    if(speaking&&(!synth||typeof SpeechSynthesisUtterance==="undefined")){
+      speaking=false;addMessage("Your browser does not support speech playback.","bot");return;
     }
-
-    chatArea.appendChild(msg);
-
-    chatArea.scrollTop =
-    chatArea.scrollHeight;
-}
-
-/* TYPING */
-
-function showTyping(){
-
-    const typing =
-    document.createElement("div");
-
-    typing.className =
-    "message ai typing";
-
-    typing.id = "typing";
-
-    typing.innerHTML =
-    "<strong>Azrael:</strong><br>Preparing demo reply...";
-
-    chatArea.appendChild(typing);
-
-    chatArea.scrollTop =
-    chatArea.scrollHeight;
-}
-
-function removeTyping(){
-
-    const typing =
-    document.getElementById("typing");
-
-    if(typing){
-        typing.remove();
-    }
-
-}
-
-/* AI RESPONSES */
-
-function fakeResponse(message){
-
-    const lower =
-    message.toLowerCase();
-
-    if(lower.includes("who are you")
-    || lower.includes("what are you")){
-
-        return "This is a scripted preview of Azrael AI, an assistant in development for conversation, research, and everyday work.";
-    }
-
-    if(lower.includes("what can you do")
-    || lower.includes("help")){
-
-        return "This demo shows the chat interface. Advanced research, document analysis, coding assistance, and workflow automation are planned for Azrael AI.";
-    }
-
-    if(lower.includes("privacy")
-    || lower.includes("private")){
-
-        return "This demo runs in your browser and uses scripted replies. It does not connect to the Azrael AI backend.";
-    }
-
-    if(lower.includes("trucking")
-    || lower.includes("dispatch")){
-
-        return "Tools for specialized industries are a future direction. This demo doesn't perform dispatch or logistics tasks.";
-    }
-
-    if(lower.includes("real estate")
-    || lower.includes("property")){
-
-        return "Tools for specialized industries are a future direction. This demo doesn't analyze properties or real estate documents.";
-    }
-
-    if(lower.includes("business")
-    || lower.includes("startup")){
-
-        return "Azrael Systems is developing Azrael AI to help individuals and businesses accomplish more and spend less time on everyday tasks.";
-    }
-
-    if(lower.includes("automation")){
-
-        return "Workflow automation is planned to help people spend less time on repetitive tasks.";
-    }
-
-    if(lower.includes("documents")
-    || lower.includes("pdf")){
-
-        return "Document analysis is planned for Azrael AI. This demo doesn't read or analyze files.";
-    }
-
-    if(lower.includes("ai")){
-
-        return "Conversational AI chat is implemented in development. This prototype uses scripted replies to show what the interface looks like.";
-    }
-
-    if(lower.includes("hello")
-    || lower.includes("hi")){
-
-        return "Hello. Try asking 'What can you do?' to see a sample reply.";
-    }
-
-    const responses = [
-
-        "This is a scripted demo. Try asking 'Who are you?'",
-
-        "Try a sample question about documents or automation.",
-
-        "This interface previews how a conversation could look. The replies are scripted.",
-
-        "Try asking 'What can you do?' for a look at the planned features.",
-
-        "This demo shows a sample conversation with scripted replies."
-
-    ];
-
-    return responses[
-        Math.floor(
-            Math.random() * responses.length
-        )
-    ];
-}
-
-/* SEND MESSAGE */
-
-function sendMessage(){
-
-    const text =
-    input.value.trim();
-
-    if(!text) return;
-
-    addMessage(text, "user");
-
-    input.value = "";
-
-    showTyping();
-
-    setTimeout(() => {
-
-        removeTyping();
-
-        const response =
-        fakeResponse(text);
-
-        addMessage(response, "ai");
-
-    }, 900);
-}
-
-/* BUTTON */
-
-sendBtn.addEventListener(
-"click",
-sendMessage
-);
-
-/* ENTER KEY */
-
-input.addEventListener(
-"keypress",
-function(e){
-
-    if(e.key === "Enter"){
-
-        sendMessage();
-
-    }
-
-});
-
+  });
+  $("mic").addEventListener("click",()=>{
+    const Recognizer=window.SpeechRecognition||window.webkitSpeechRecognition;
+    if(!Recognizer){addMessage("Voice input is not supported in this browser. You can still type.","bot");return;}
+    if(recognizer){recognizer.stop();return;}
+    recognizer=new Recognizer();recognizer.lang="en-US";recognizer.interimResults=false;recognizer.continuous=false;
+    recognizer.onresult=e=>{if(e.results[0]&&e.results[0][0]) input.value=e.results[0][0].transcript;};
+    recognizer.onend=()=>{recognizer=null;orbState("ready")};
+    recognizer.onerror=()=>{recognizer=null;orbState("ready");addMessage("Microphone input was unavailable. Try typing instead.","bot")};
+    try{recognizer.start();orbState("listening")}catch{recognizer=null;orbState("ready")}
+  });
+  function settings(open){drawer.hidden=!open;backdrop.hidden=!open;if(open){$("settings-close").focus()}else{$("settings-open").focus()}}
+  $("settings-open").addEventListener("click",()=>settings(true));
+  $("settings-close").addEventListener("click",()=>settings(false));
+  backdrop.addEventListener("click",()=>settings(false));
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!drawer.hidden)settings(false)});
+  addMessage("Hello. I'm Azrael's interface preview. Ask about memory, trucking, voice, or settings to explore the design. My replies here are scripted.","bot");
+})();
 </script>
-
 </body>
 </html>
